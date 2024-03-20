@@ -21,7 +21,7 @@ You'll need to have the following installed to run the project:
 1. Clone the repository to your local machine:
 
     ```bash
-    git clone https://your-repository-url-here
+    git clone https://github.com/yibork/Municipality_Fleet_Management.git
     cd Municipality_Fleet_Management
     ```
 
