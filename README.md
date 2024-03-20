@@ -1,53 +1,48 @@
 # Municipality Fleet Management
 
 ## Introduction
-Welcome to the Municipality Fleet Management system! This project is designed to streamline the management of municipal vehicles, making it easier to track maintenance, usage, and logistical information. Our aim is to provide a robust solution to manage the fleet effectively and efficiently.
+The Municipality Fleet Management system is a web application designed to help manage the fleet of vehicles owned by the municipality. With this system, users can keep track of vehicle maintenance schedules, usage logs, and other logistical details.
 
 ## Getting Started
 
-To get the project running locally on your machine, follow the steps outlined below.
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
 ### Prerequisites
 
-You'll need to have the following installed to run the project:
-
-- Python 3.8+
-- pip (Python package manager)
-- Virtualenv (tool to create isolated Python environments)
+Before you begin, ensure you have the following installed:
+- Python 3.8 or higher
 - PostgreSQL
+- Git
 
-### Setting Up a Development Environment
+### Installation
 
-1. Clone the repository to your local machine:
-
+1. **Clone the repository**
     ```bash
-    git clone https://github.com/yibork/Municipality_Fleet_Management.git
+    git clone https://your-repository-url-here.git
     cd Municipality_Fleet_Management
     ```
 
-2. Create a virtual environment and activate it:
+2. **Set up a Python virtual environment and activate it**
 
-    **For macOS/Linux:**
     ```bash
+    # Windows
+    python -m venv venv
+    .\venv\Scripts\activate
+
+    # macOS and Linux
     python3 -m venv venv
     source venv/bin/activate
     ```
 
-    **For Windows:**
-    ```cmd
-    python -m venv venv
-    .\venv\Scripts\activate
-    ```
-
-3. Install the project dependencies:
+3. **Install the required packages**
 
     ```bash
     pip install -r requirements.txt
     ```
 
-### Setting Up the Database
+### Database Setup
 
-Ensure PostgreSQL is installed and running on your local machine. Then, create a database with the following credentials:
+1. **Ensure PostgreSQL is installed and running on your local machine. Then, create a database with the following credentials:**
 
 ```plaintext
 Database Name: fleet_management
@@ -55,3 +50,16 @@ Database User: postgres
 Database Password: password
 Host: localhost
 Port: 5432
+
+3. **Run migrations**
+
+    ```bash
+    python manage.py migrate
+    ```
+
+### Running the Development Server
+
+Start the development server with:
+
+```bash
+python manage.py runserver
