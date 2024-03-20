@@ -68,8 +68,9 @@ Start the development server with:
 python manage.py runserver
 ## Creating a Personal Branch
 Before you start working on a new feature or a fix, create a new branch with your name from the main branch:
-
+```
 ```bash
 git checkout -b feature/<your-name>
 # or
 git checkout -b fix/<your-name>
+```
