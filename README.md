@@ -53,16 +53,16 @@ Database User: postgres
 Database Password: password
 Host: localhost
 Port: 5432
-
+```
 3. **Run migrations**
 
-    ```bash
-    python manage.py migrate
-    ```
+```bash
+python manage.py migrate
+```
 
 ### Running the Development Server
 
-Start the development server with:
+### Start the development server with:
 
 ```bash
 python manage.py runserver
