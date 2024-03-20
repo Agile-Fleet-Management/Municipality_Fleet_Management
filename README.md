@@ -39,7 +39,10 @@ Before you begin, ensure you have the following installed:
     ```bash
     pip install -r requirements.txt
     ```
-
+4. **Example of creating an app**
+    ```bash
+python manage.py startapp users apps/users
+```
 ### Database Setup
 
 1. **Ensure PostgreSQL is installed and running on your local machine. Then, create a database with the following credentials:**
