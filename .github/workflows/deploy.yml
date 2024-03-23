@@ -17,8 +17,14 @@ jobs:
           username: ${{ secrets.DIGITALOCEAN_DROPLET_USERNAME }}
           password: ${{ secrets.DIGITALOCEAN_DROPLET_PASSWORD }}
           script: |
-            pwd
-            ls -alh 
-            chmod +x ./scripts/deploy.sh
-            ./scripts/deploy.sh
+            #!/bin/bash
 
+            echo "Pulling latest API changes"
+            
+            git pull
+            
+            echo "Building latest changes"
+            
+            docker-compose up -d --build
+            
+            echo "Deployment complete"
