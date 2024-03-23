@@ -1,4 +1,4 @@
 from django.http import HttpResponse
 
 def home(request):
-    return HttpResponse('App is deployed and running!')
+    return HttpResponse('App is deployed!')
