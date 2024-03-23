@@ -3,7 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-      - Douae
+      - main
 
 jobs:
   deploy:
@@ -17,6 +17,6 @@ jobs:
           username: ${{ secrets.DIGITALOCEAN_DROPLET_USERNAME }}
           password: ${{ secrets.DIGITALOCEAN_DROPLET_PASSWORD }}
           script: |
-            cd ./Municipality_Fleet_Management
-            chmod +x ./scripts/deploy.sh
+            cd Municipality_Fleet_Management
+            ./scripts/deploy.sh
 
