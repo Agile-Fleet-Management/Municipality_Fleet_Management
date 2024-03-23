@@ -13,7 +13,8 @@ services:
     env_file: .env
     restart: unless-stopped
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
   postgres:
     image: postgres:latest
@@ -29,9 +30,15 @@ services:
       - app
     volumes:
       - postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
 volumes:
   postgres:
+
 
 networks:
   app:
