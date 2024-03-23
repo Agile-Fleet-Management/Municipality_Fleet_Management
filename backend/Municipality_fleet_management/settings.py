@@ -80,11 +80,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fleet_management',
         'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': 'localhost', 
+        'PASSWORD': 'postgres',
+        'HOST': 'postgres', 
         'PORT': '5432',
     }
 }
+
 
 
 # Password validation
