@@ -19,3 +19,4 @@ jobs:
           script: |
             cd Municipality_Fleet_Management
             ./scripts/deploy.sh
+
