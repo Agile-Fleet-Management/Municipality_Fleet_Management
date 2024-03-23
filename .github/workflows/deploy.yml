@@ -21,4 +21,5 @@ jobs:
             pwd
             ls
             cd ./Municipality_Fleet_Management
-            ./scripts/deploy.sh
+            chmod +x ./scripts/deploy.sh
+
