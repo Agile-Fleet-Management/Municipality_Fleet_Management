@@ -10,7 +10,7 @@ class Role(models.Model):
 def __str__(self):
     return self.role_id
 
-class Employee(models.Model):
+class User(models.Model):
 
     employee_id = models.IntegerField()
     dname = models.CharField(max_length=20) 

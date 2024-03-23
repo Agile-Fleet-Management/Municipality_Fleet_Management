@@ -3,12 +3,20 @@ name: Deploy
 on:
   push:
     branches:
+<<<<<<< Updated upstream
       - main
+=======
+      - Douae
+>>>>>>> Stashed changes
 
 jobs:
   deploy:
     name: Deploy
+<<<<<<< Updated upstream
     runs-on: ubuntu-22.04
+=======
+    runs-on: ubuntu-latest
+>>>>>>> Stashed changes
     steps:
       - name: Deploy
         uses: appleboy/ssh-action@master
@@ -18,4 +26,9 @@ jobs:
           password: ${{ secrets.DIGITALOCEAN_DROPLET_PASSWORD }}
           script: |
             cd Municipality_Fleet_Management
+<<<<<<< Updated upstream
             ./scripts/deploy.sh 
+=======
+            ./scripts/deploy.sh
+
+>>>>>>> Stashed changes
