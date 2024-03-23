@@ -17,6 +17,7 @@ jobs:
           username: ${{ secrets.DIGITALOCEAN_DROPLET_USERNAME }}
           password: ${{ secrets.DIGITALOCEAN_DROPLET_PASSWORD }}
           script: |
+            git clone https://github.com/Agile-Fleet-Management/Municipality_Fleet_Management.git
             pwd
             ls
             cd ./Municipality_Fleet_Management
