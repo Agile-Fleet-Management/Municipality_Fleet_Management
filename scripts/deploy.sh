@@ -6,7 +6,7 @@ git pull
 
 echo "Stopping and removing existing containers"
 
-docker-compose down
+docker compose down
 
 echo "Building latest changes"
 
