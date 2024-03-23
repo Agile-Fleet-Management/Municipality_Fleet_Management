@@ -1,9 +1,5 @@
 #!/bin/bash
 
-echo "Resetting local changes"
-
-git reset --hard HEAD
-
 echo "Pulling latest API changes"
 
 git pull
