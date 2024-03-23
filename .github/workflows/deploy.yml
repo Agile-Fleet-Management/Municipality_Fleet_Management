@@ -17,14 +17,7 @@ jobs:
           username: ${{ secrets.DIGITALOCEAN_DROPLET_USERNAME }}
           password: ${{ secrets.DIGITALOCEAN_DROPLET_PASSWORD }}
           script: |
-            #!/bin/bash
-
-            echo "Pulling latest API changes"
-            
-            git pull
-            
-            echo "Building latest changes"
-            
-            docker-compose up -d --build
-            
-            echo "Deployment complete"
+            pwd
+            ls
+            cd ./Municipality_Fleet_Management
+            ./scripts/deploy.sh
