@@ -18,5 +18,5 @@ jobs:
           password: ${{ secrets.DIGITALOCEAN_DROPLET_PASSWORD }}
           script: |
             cd Municipality_Fleet_Management
-            chmod +x ./scripts/deploy.sh
+            ./scripts/deploy.sh
 
