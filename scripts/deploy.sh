@@ -1,5 +1,7 @@
 #!/bin/bash
 
+git stash
+
 echo "Pulling latest API changes"
 
 git pull
