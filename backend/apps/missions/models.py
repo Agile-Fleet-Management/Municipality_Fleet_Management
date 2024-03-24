@@ -1,11 +1,9 @@
 from django.db import models
-from ..Employee.models import users
-
-
+from apps.users.models import User
 
 class Mission(models.Model):
 
-    driver_id = models.ForeignKey(Employee,on_delete=models.CASCADE)
+    driver_id = models.ForeignKey(User,on_delete=models.CASCADE)
     mission_id=models.IntegerField()
     start_time=models.DateField() 
     end_time=models.DateField()
@@ -14,24 +12,29 @@ class Mission(models.Model):
     
     
     def __str__(self):
-        return self.mission_id 
+        return self.id 
     
 class Driver(models.Model):
-    driver_id = models.ForeignKey(Employee,on_delete=models.CASCADE)
-    mission_id=models.IntegerField()
-    vehicle_id=models.CharField(max_length=20)
+    mission_id = models.IntegerField()
+    vehicle_id = models.CharField(max_length=20)
+    driver_id = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ('mission_id', 'vehicle_id')
+    
+
 
     def __str__(self):
-        return self. driver_id  
+        return self.id 
 
 class MissionRequest(models.Model):
 
-    request_id=models.IntegerField()
+    # request_id=models.IntegerField()
     mission_id=models.ForeignKey(Mission,on_delete=models.CASCADE)
-    requester_id=models.ForeignKey(Mission,on_delete=models.CASCADE)
+    requester_id=models.ForeignKey(User,on_delete=models.CASCADE)
     request_time=models.CharField(max_length=20)
     m_status=models.CharField(max_length=20)
     p_status=models.CharField(max_length=20)
 
     def __str__(self):
-        return self.request_id
+        return self.id

@@ -3,16 +3,15 @@ from django.db import models
 
 class Role(models.Model):
 
-    role_id = models.IntegerField()
+    # role_id = models.IntegerField()
     name = models.CharField(max_length=20) 
     description = models.CharField(max_length=20) 
 
 def __str__(self):
-    return self.role_id
+    return self.id
 
 class User(models.Model):
 
-    employee_id = models.IntegerField()
     dname = models.CharField(max_length=20) 
     lname = models.CharField(max_length=20) 
     number = models.IntegerField()
@@ -23,4 +22,4 @@ class User(models.Model):
     password = models.CharField(max_length=20) 
     
 def __str__(self):
-    return self.employee_id
+    return self.id

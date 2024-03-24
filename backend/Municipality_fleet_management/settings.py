@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-r4sb^&4!+prj*ljp00rj@6zrzg2r-lvg(jm5*d^v1vi0u8f7po
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['161.35.95.152', 'localhost']
+ALLOWED_HOSTS = ['161.35.95.152', '*']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apps.users',
     'apps.Vehicles',
+    'apps.missions'
 ]
 
 MIDDLEWARE = [
@@ -80,8 +81,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fleet_management',
         'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': 'postgres', 
+        'PASSWORD': 'password',
+        'HOST': 'localhost', 
         'PORT': '5432',
     }
 }

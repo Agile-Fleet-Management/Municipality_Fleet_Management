@@ -3,28 +3,26 @@ from django.db import models
 
 class Vehicle(models.Model):
 
-    vehicle_id = models.CharField(max_length=20) 
     make = models.CharField(max_length=20) 
     model = models.CharField(max_length=20) 
     age = models.IntegerField()
     status = models.CharField(max_length=20) 
-    Vtype = models.CharField(max_length=20) 
+    Vtype = models.ForeignKey(Vtype,on_delete=models.CASCADE)
     kms = models.CharField(max_length=20) 
     notification_time = models.CharField(max_length=20) 
     notification_mileage = models.CharField(max_length=20) 
 
 def __str__(self):
-    return self.vehicle_id
+    return self.id
 
 class Vtype(models.Model):
 
-    type_id = models.IntegerField()
     name = models.CharField(max_length=20) 
     description = models.CharField(max_length=20) 
     
     
 def __str__(self):
-    return self.type_id
+    return self.id
 
 class Maintenance(models.Model):
 
@@ -39,11 +37,11 @@ class Maintenance(models.Model):
     password = models.CharField(max_length=20) 
     
 def __str__(self):
-    return self.employee_id
+    return self.id
 
 class MType(models.Model):
 
-    record_id = models.IntegerField()
+    # record_id = models.IntegerField()
     vehicle_id = models.CharField(max_length=20) 
     start_time = models.CharField(max_length=20) 
     end_time = models.IntegerField()
@@ -53,4 +51,4 @@ class MType(models.Model):
     kms = models.CharField(max_length=20) 
     
 def __str__(self):
-    return self.record_id
+    return self.id
