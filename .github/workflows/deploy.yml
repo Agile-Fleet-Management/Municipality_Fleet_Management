@@ -24,6 +24,6 @@ jobs:
             git stash
             echo "Pulling latest API changes"
             git pull
-            chmod +rwx deploy.sh
-            ./deploy.sh
+            chmod +rwx ./scripts/deploy.sh
+            ./scripts/deploy.sh
 
