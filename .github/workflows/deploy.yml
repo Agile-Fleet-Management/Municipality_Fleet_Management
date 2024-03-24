@@ -18,10 +18,6 @@ jobs:
           password: ${{ secrets.DIGITALOCEAN_DROPLET_PASSWORD }}
           script: |
             cd Municipality_Fleet_Management
-            echo "Changing branch to main"
-            git checkout main
-            echo "Stashing any existing changes"
-            git stash
             echo "Pulling latest API changes"
             git pull
             chmod +rwx ./scripts/deploy.sh
