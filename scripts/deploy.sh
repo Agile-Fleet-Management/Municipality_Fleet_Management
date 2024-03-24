@@ -1,8 +1,4 @@
 #!/bin/bash
-echo "Stopping and removing existing containers"
-
-docker compose down
-
 echo "Building latest changes"
 
 docker compose up -d --build
