@@ -19,12 +19,6 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r ./backend/requirements.txt
-      - name: Make Migrations
-        run: |
-            python ./backend/manage.py makemigrations
-      - name: Run Migrations
-        run: |
-            python ./backend/manage.py migrate
       - name: Run Tests
         run: |
           python ./backend/manage.py test
