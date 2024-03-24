@@ -1,4 +1,9 @@
 #!/bin/bash
+echo "Changing branch to main"
+
+git checkout main
+
+echo "Stashing any existing changes"
 
 git stash
 
