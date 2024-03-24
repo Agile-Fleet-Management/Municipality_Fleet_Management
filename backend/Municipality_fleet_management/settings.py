@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'fleet_management',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'postgres', 
+        'HOST': 'localhost', 
         'PORT': '5432',
     }
 }
