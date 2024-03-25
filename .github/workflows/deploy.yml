@@ -12,11 +12,7 @@ on:
 jobs:
   deploy:
     name: Deploy
-<<<<<<< Updated upstream
-    runs-on: ubuntu-22.04
-=======
     runs-on: ubuntu-latest
->>>>>>> Stashed changes
     steps:
       - name: Deploy
         uses: appleboy/ssh-action@master
@@ -26,9 +22,8 @@ jobs:
           password: ${{ secrets.DIGITALOCEAN_DROPLET_PASSWORD }}
           script: |
             cd Municipality_Fleet_Management
-<<<<<<< Updated upstream
-            ./scripts/deploy.sh 
-=======
+            echo "Pulling latest API changes"
+            git pull
+            chmod +rwx ./scripts/deploy.sh
             ./scripts/deploy.sh
 
->>>>>>> Stashed changes

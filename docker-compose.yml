@@ -13,12 +13,8 @@ services:
     env_file: .env
     restart: unless-stopped
     depends_on:
-<<<<<<< Updated upstream
-      - postgres
-=======
       postgres:
         condition: service_healthy
->>>>>>> Stashed changes
 
   postgres:
     image: postgres:latest
@@ -34,25 +30,16 @@ services:
       - app
     volumes:
       - postgres:/var/lib/postgresql/data
-<<<<<<< Updated upstream
-=======
     healthcheck:
       test: [ "CMD-SHELL", "pg_isready -U postgres" ]
       interval: 5s
       timeout: 5s
       retries: 5
->>>>>>> Stashed changes
 
 volumes:
   postgres:
 
-<<<<<<< Updated upstream
-networks:
-  app:
-    driver: bridge
-=======
 
 networks:
   app:
     driver: bridge
->>>>>>> Stashed changes
