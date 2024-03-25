@@ -1,25 +1,20 @@
 from django.db import models
-
+from django.contrib.auth.models import AbstractUser
 
 class Role(models.Model):
 
-    # role_id = models.IntegerField()
     name = models.CharField(max_length=20) 
     description = models.CharField(max_length=20) 
 
-def __str__(self):
-    return self.id
+    def __str__(self):
+        return self.name
 
-class User(models.Model):
-
-    dname = models.CharField(max_length=20) 
-    lname = models.CharField(max_length=20) 
-    number = models.IntegerField()
-    address = models.CharField(max_length=20) 
-    role_id = models.CharField(max_length=20)
-    picture = models.ImageField(upload_to='images/', null=True, blank=True)
-    username = models.CharField(max_length=20) 
-    password = models.CharField(max_length=20) 
+class User(AbstractUser):
     
-def __str__(self):
-    return self.id
+    phone_number = models.CharField(max_length=20) 
+    address = models.CharField(max_length=20) 
+    role_id = models.ForeignKey(Role,on_delete=models.CASCADE,null=True,blank=True)   #
+    picture = models.ImageField(upload_to='images/', null=True, blank=True)
+
+    def __str__(self):
+        return self.username
