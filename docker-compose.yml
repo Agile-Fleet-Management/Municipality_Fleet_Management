@@ -3,6 +3,7 @@ version: "3.7"
 services:
   backend:
     container_name: backend
+    env_file: .env
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -10,7 +11,6 @@ services:
       - "5000:5000"
     networks:
       - app
-    env_file: .env
     restart: unless-stopped
     depends_on:
       postgres:
@@ -20,10 +20,6 @@ services:
     image: postgres:latest
     container_name: database
     env_file: .env
-    environment:
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_DB=fleet_management
     ports:
       - "5432:5432"
     networks:
