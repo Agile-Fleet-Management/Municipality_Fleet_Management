@@ -3,11 +3,7 @@ name: Deploy
 on:
   push:
     branches:
-<<<<<<< Updated upstream
       - main
-=======
-      - Douae
->>>>>>> Stashed changes
 
 jobs:
   deploy:
