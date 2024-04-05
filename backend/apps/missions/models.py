@@ -22,7 +22,7 @@ class Mission(models.Model):
     description=models.CharField(max_length=500)
 
     def __str__(self):
-        return  "Mission"+self.title+", status: "+self.status
+        return  "Mission: "+self.title+", status: "+self.status
     
 class Driver(models.Model):
     
