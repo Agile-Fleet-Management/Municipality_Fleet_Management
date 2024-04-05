@@ -1,18 +1,18 @@
 # Municipality Fleet Management
 
 ## Introduction
-The Municipality Fleet Management system is a web application designed to help manage the fleet of vehicles owned by the municipality. With this system, users can keep track of vehicle maintenance schedules, usage logs, and other logistical details.
+The Municipality Fleet Management system is a web application designed to manage the fleet of vehicles owned by the municipality. This system allows users to track vehicle maintenance schedules, usage logs, and other logistical details, now with the ease of Docker containers for development, testing, and production environments.
 
 ## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
+These instructions will guide you through setting up a copy of the project on your local machine for development and testing purposes using Docker.
 
 ### Prerequisites
-
 Before you begin, ensure you have the following installed:
-- Python 3.8 or higher
-- PostgreSQL
+- Docker
+- Docker Compose
 - Git
+
+Docker will manage the Python and PostgreSQL environments, so you don't need to install them separately on your local machine.
 
 ### Installation
 
@@ -22,55 +22,18 @@ Before you begin, ensure you have the following installed:
     cd Municipality_Fleet_Management
     ```
 
-2. **Set up a Python virtual environment and activate it**
+2. **Build the Docker containers**
+
+    The project includes a `Dockerfile` for the web application and a `docker-compose.yml` file that defines the services (web app and database).
 
     ```bash
-    # Windows
-    python -m venv venv
-    .\venv\Scripts\activate
-
-    # macOS and Linux
-    python3 -m venv venv
-    source venv/bin/activate
+    docker-compose build
     ```
 
-3. **Install the required packages**
+3. **Start the Docker containers**
 
     ```bash
-    pip install -r requirements.txt
+    docker-compose up
     ```
-4. **Example of creating an app**
-    ```bash
-    python manage.py startapp users apps/users
-    ```
-### Database Setup
 
-1. **Ensure PostgreSQL is installed and running on your local machine. Then, create a database with the following credentials:**
-
-```plaintext
-Database Name: fleet_management
-Database User: postgres
-Database Password: password
-Host: localhost
-Port: 5432
-```
-3. **Run migrations**
-
-```bash
-python manage.py migrate
-```
-
-### Running the Development Server
-
-### Start the development server with:
-
-```bash
-python manage.py runserver
-## Creating a Personal Branch
-Before you start working on a new feature or a fix, create a new branch with your name from the main branch:
-```
-```bash
-git checkout -b feature/<your-name>
-# or
-git checkout -b fix/<your-name>
-```
+    This command starts the necessary services defined in your `docker-compose.yml`. It typically includes the web application and the PostgreSQL database service.
