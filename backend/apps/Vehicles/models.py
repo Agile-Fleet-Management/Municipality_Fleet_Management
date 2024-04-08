@@ -36,10 +36,9 @@ class Mtype(models.Model):
     def __str__(self):
         return self.name
 
-
 class Maintenance(models.Model):
 
-    title=models.CharField(max_length=20)
+    title = models.CharField(max_length=20)
     vehicle_id = models.CharField(max_length=20) 
     start_time = models.CharField(max_length=20) 
     end_time = models.IntegerField()
