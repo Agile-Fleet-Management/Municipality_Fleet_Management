@@ -1,8 +1,10 @@
 name: Django CI
 
+
+
 on:
   push:
-    branches: ["main", "Douae"]
+    branches: ["main"]
   pull_request:
     branches: ["main"]
 
