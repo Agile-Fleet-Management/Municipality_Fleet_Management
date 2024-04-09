@@ -23,7 +23,7 @@ class Mission(models.Model):
 
     def __str__(self):
         return  self.status
-    
+     
 class Driver(models.Model):
     
     mission_id = models.ForeignKey(Mission,on_delete=models.CASCADE)
