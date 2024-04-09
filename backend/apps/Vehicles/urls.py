@@ -1,4 +1,40 @@
 # from django.urls import path
+# from django.contrib import admin
+# from . import views
+
+# urlpatterns = [
+#     path('vehicle/', views.VehicleListView.as_view(), name='vehicle-list'),
+# ]
+
+
+
+# urls.py in your Vehicles app
+
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from .views import VehicleViewSet
+
+router = DefaultRouter()
+router.register(r'vehicles', VehicleViewSet)
+
+urlpatterns = [
+    path('', include(router.urls)),
+]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # from .views import VtypeAPIView, VehicleAPIView, MtypeAPIView, MaintenanceAPIView
 
 # urlpatterns = [
@@ -8,16 +44,21 @@
 #     path('maintenances/', MaintenanceAPIView.as_view()),
 # ]
 
-from rest_framework.routers import DefaultRouter
-from django.urls import include, path
-from .views import VtypeViewSet, VehicleViewSet, MtypeViewSet, MaintenanceViewSet
+# from rest_framework.routers import DefaultRouter
+# from django.urls import include, path
+# from .views import VtypeViewSet, VehicleViewSet, MtypeViewSet, MaintenanceViewSet
 
-router = DefaultRouter()
-router.register(r'vtypes', VtypeViewSet)
-router.register(r'vehicles', VehicleViewSet)
-router.register(r'mtypes', MtypeViewSet)
-router.register(r'maintenances', MaintenanceViewSet)
+# router = DefaultRouter()
+# router.register(r'vtypes', VtypeViewSet)
+# router.register(r'vehicles', VehicleViewSet)
+# router.register(r'mtypes', MtypeViewSet)
+# router.register(r'maintenances', MaintenanceViewSet)
 
-urlpatterns = [
-    path('', include(router.urls)),
-]
+
+
+# from .views import VehicleListView
+
+# urlpatterns = [
+#     path('vehicles/', VehicleListView.as_view(), name='vehicle-list'),
+# ]
+

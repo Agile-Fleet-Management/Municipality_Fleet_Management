@@ -30,6 +30,7 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.users',
-    'apps.Vehicles',
+    # 'apps.Vehicles',
+    'apps.Vehicles.apps.VehiclesConfig',
     'apps.missions'
 ]
 AUTH_USER_MODEL = "users.User"
