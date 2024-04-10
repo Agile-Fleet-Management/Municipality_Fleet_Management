@@ -1,4 +1,6 @@
 from django.db import models
+import os
+
 
 class Vtype(models.Model):
 
@@ -24,9 +26,21 @@ class Vehicle(models.Model):
         default='2'
     )
     Vtype = models.ForeignKey(Vtype,on_delete=models.CASCADE)
-    kms = models.CharField(max_length=20) 
+    kms = models.FloatField()
     notification_time_year = models.IntegerField()
     notification_mileage = models.FloatField()
+
+    # New field for picture
+    picture = models.ImageField(upload_to='vehicle_pictures/', null=True)
+
+    def save(self, *args, **kwargs):
+        # Check if the picture filename is too long
+        if self.picture and len(self.picture.name) > 100:
+            # Truncate the filename but keep the extension
+            filename_base, filename_ext = os.path.splitext(self.picture.name)
+            self.picture.name = filename_base[:95] + filename_ext
+
+        super(Vehicle, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.brand
