@@ -14,11 +14,11 @@ class Vehicle(models.Model):
     model = models.CharField(max_length=20) 
     age = models.IntegerField()
     status_choices=[
-        (1,"maintenance"),
-        (2,"available"),
-        (3,"booked"),
+        ("1","maintenance"),
+        ("2","available"),
+        ("3","booked"),
     ]
-    status=models.CharField(choices=status_choices,default=2)
+    status=models.CharField(choices=status_choices,default="2")
     Vtype = models.ForeignKey(Vtype,on_delete=models.CASCADE)
     kms = models.CharField(max_length=20) 
     notification_time_year = models.IntegerField()
