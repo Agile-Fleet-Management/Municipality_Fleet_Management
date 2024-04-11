@@ -15,7 +15,6 @@ class VtypeViewSet(viewsets.ModelViewSet):
     serializer_class = VtypeSerializer
 
 
-
 class MtypeViewSet(ModelViewSet):
     queryset = Mtype.objects.all()
     serializer_class = MtypeSerializer

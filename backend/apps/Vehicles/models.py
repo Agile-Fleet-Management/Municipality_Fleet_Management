@@ -26,7 +26,7 @@ class Vehicle(models.Model):
         default='2'
     )
     Vtype = models.ForeignKey(Vtype,on_delete=models.CASCADE)
-    kms = models.FloatField()
+    kms = models.FloatField() 
     notification_time_year = models.IntegerField()
     notification_mileage = models.FloatField()
 
@@ -54,16 +54,17 @@ class Mtype(models.Model):
     def __str__(self):
         return self.name
 
-class Maintenance(models.Model):
 
+class Maintenance(models.Model):
     title = models.CharField(max_length=20)
-    vehicle_id = models.CharField(max_length=20) 
-    start_time = models.CharField(max_length=20) 
-    end_time = models.IntegerField()
-    m_type = models.ForeignKey(Mtype,on_delete=models.CASCADE)
-    decription = models.CharField(max_length=500)
+    vehicle_id = models.CharField(max_length=20)
+    start_time = models.DateTimeField()  # Use DateTimeField for datetime information
+    end_time = models.DateTimeField()    # Use DateTimeField for datetime information
+    m_type = models.ForeignKey('Mtype', on_delete=models.CASCADE)  # Assuming 'Mtype' is another model
+    description = models.CharField(max_length=500)  # There was a typo here, corrected it to 'description'
     cost = models.FloatField()
-    kms = models.FloatField(max_length=20) 
-    
+    kms = models.FloatField()  # Removed max_length as it is not used with FloatField
+
     def __str__(self):
         return self.title
+

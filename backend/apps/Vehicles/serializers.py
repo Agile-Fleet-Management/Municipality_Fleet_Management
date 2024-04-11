@@ -40,4 +40,4 @@ class MaintenanceSerializer(serializers.ModelSerializer):
         ]
 
     def get_m_type_display(self, obj):
-        return str(obj.m_type)  # Assuming Mtype model has a __str__ method defined
+        return str(obj.m_type) 
