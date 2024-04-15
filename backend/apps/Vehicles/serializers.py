@@ -36,7 +36,7 @@ class MaintenanceSerializer(serializers.ModelSerializer):
         model = Maintenance
         fields = [
             'id', 'title', 'vehicle_id', 'start_time', 'end_time', 'm_type', 
-            'm_type_display', 'decription', 'cost', 'kms'
+            'm_type_display', 'description', 'cost', 'kms'
         ]
 
     def get_m_type_display(self, obj):
