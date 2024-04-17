@@ -12,6 +12,7 @@ jobs:
     steps:
       - name: Build container
         run: |
+          cd Municipality_Fleet_Management
           docker compose up -d --build
       - name: Migrations
         run: |
