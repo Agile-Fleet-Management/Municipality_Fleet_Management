@@ -6,10 +6,11 @@ class MissionSerializer(serializers.ModelSerializer):
         model = Mission
         fields = '__all__'
     def validate(self, data):
-        if data['start_time'] > data['end_time']:
-            raise serializers.ValidationError("End date must be after start date")
-        if data['start_time'] > data['expected_arrival']:
-            raise serializers.ValidationError("Expected arrival date must be after start date")
+        if 'start_time' in data and 'end_time' in data and  'expected_arrival' in data:
+            if data['start_time'] > data['end_time']:
+                raise serializers.ValidationError("End date must be after start date")
+            if data['start_time'] > data['expected_arrival']:
+                raise serializers.ValidationError("Expected arrival date must be after start date")
         return data
 
 class DriverSerializer(serializers.ModelSerializer):

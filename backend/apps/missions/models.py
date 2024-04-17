@@ -6,7 +6,7 @@ from django.core.exceptions import ValidationError
 
 
 class Mission(models.Model):
-    title = models.CharField(max_length=20, default="asmae")
+    title = models.CharField(max_length=100, default="asmae")
     start_time = models.DateTimeField()
     end_time = models.DateTimeField()
     status_choices = [
@@ -33,11 +33,12 @@ class Mission(models.Model):
             )
 
     def save(self, *args, **kwargs):
-        self.full_clean() #to mke sure it is called even outside of django admin
+        self.full_clean() #to make sure it is called even outside of django admin
         super().save(*args, **kwargs)
 
     def __str__(self):
         return "Mission: " + self.title + ", status: " + self.status
+
 
 
 class Driver(models.Model):
@@ -50,7 +51,7 @@ class Driver(models.Model):
         unique_together = ("mission_id", "vehicle_id")
 
     def __str__(self):
-        return self.driver_id
+        return "Driver"
 
 
 class MissionParticipant(models.Model):
@@ -62,4 +63,4 @@ class MissionParticipant(models.Model):
         unique_together = ("mission_id", "participant_id")
 
     def __str__(self):
-        return self.participant_id
+        return "Participant"
