@@ -1,8 +1,10 @@
 name: Django CI
 
+
+
 on:
   push:
-    branches: '**'
+    branches: ["main"]
   pull_request:
     branches: ["main"]
 
@@ -10,16 +12,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: List files in the root directory
-        run: ls -l
-      - name: Build container
+      - uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v3
+        with:
+          python-version: 3.9
+      - name: Install Dependencies
         run: |
-          docker-compose up -d --build
-      - name: Migrations
-        run: |
-          docker-compose exec -T backend python manage.py makemigrations --noinput
-          docker-compose exec -T backend python manage.py migrate
+          python -m pip install --upgrade pip
+          pip install -r ./backend/requirements.txt
       - name: Run Tests
         run: |
-          docker-compose exec -T backend python manage.py test apps/missions
+          python ./backend/manage.py test apps/missions
