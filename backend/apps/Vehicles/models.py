@@ -18,7 +18,7 @@ class Vehicle(models.Model):
         ("2","available"),
         ("3","booked"),
     ]
-    status=models.CharField(choices=status_choices,default="2")
+    status=models.CharField(choices=status_choices,default="2",max_length=20)
     Vtype = models.ForeignKey(Vtype,on_delete=models.CASCADE)
     kms = models.CharField(max_length=20) 
     notification_time_year = models.IntegerField()
