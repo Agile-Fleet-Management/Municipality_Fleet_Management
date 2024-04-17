@@ -13,13 +13,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: List files in the root directory
         run: ls -l
-      - name: Change directory and list files
-        run: |
-          cd Municipality_Fleet_Management
-          ls -l
       - name: Build container
         run: |
-          cd Municipality_Fleet_Management
           docker-compose up -d --build
       - name: Migrations
         run: |
