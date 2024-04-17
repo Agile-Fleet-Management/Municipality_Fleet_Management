@@ -18,7 +18,7 @@ jobs:
           docker-compose up -d --build
       - name: Migrations
         run: |
-          docker-compose exec -T backend python manage.py makemigrations
+          docker-compose exec -T backend python manage.py makemigrations --noinput
           docker-compose exec -T backend python manage.py migrate
       - name: Run Tests
         run: |
