@@ -20,7 +20,7 @@ class Vehicle(models.Model):
     ]
     status=models.CharField(choices=status_choices,default="2",max_length=20)
     Vtype = models.ForeignKey(Vtype,on_delete=models.CASCADE)
-    kms = models.CharField(max_length=20) 
+    kms = models.FloatField() 
     notification_time_year = models.IntegerField()
     notification_mileage = models.FloatField()
 
@@ -44,9 +44,9 @@ class Maintenance(models.Model):
     start_time = models.CharField(max_length=20) 
     end_time = models.IntegerField()
     m_type = models.ForeignKey(Mtype,on_delete=models.CASCADE)
-    decription = models.CharField(max_length=500)
+    description = models.CharField(max_length=500)
     cost = models.FloatField()
-    kms = models.FloatField(max_length=20) 
+    kms = models.FloatField() 
     
     def __str__(self):
         return self.title
