@@ -30,7 +30,6 @@ class Vehicle(models.Model):
     notification_time_year = models.IntegerField()
     notification_mileage = models.FloatField()
 
-    # New field for picture
     picture = models.ImageField(upload_to='vehicle_pictures/', null=True)
 
     def save(self, *args, **kwargs):
