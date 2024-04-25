@@ -6,3 +6,4 @@ admin.site.register(Vehicle)
 admin.site.register(Mtype)
 admin.site.register(Maintenance)
 
+
