@@ -46,5 +46,5 @@ jobs:
           DATABASE_NAME: fleet_management
           DATABASE_USER: postgres
           DATABASE_PASS: password
-          DATABASE_HOST: database
+          DATABASE_HOST: postgres
           DATABASE_PORT: 5432
