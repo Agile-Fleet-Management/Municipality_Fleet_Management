@@ -15,7 +15,7 @@ jobs:
       postgres:
         image: postgres
         env:
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: password
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -43,8 +43,8 @@ jobs:
         run: |
           python ./backend/manage.py test apps.missions
         env:
-          DATABASE_NAME: postgres
+          DATABASE_NAME: fleet_management
           DATABASE_USER: postgres
-          DATABASE_PASS: postgres
-          DATABASE_HOST: postgres
+          DATABASE_PASS: password
+          DATABASE_HOST: database
           DATABASE_PORT: 5432
