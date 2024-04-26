@@ -4,6 +4,7 @@ from apps.users.models import Role, User
 from rest_framework.test import APIClient
 from rest_framework import status
 from django.urls import reverse
+
 class RoleModelTests(TestCase):
     def test_create_role(self):
         role = Role.objects.create(name="Admin", description="Administrator role")
