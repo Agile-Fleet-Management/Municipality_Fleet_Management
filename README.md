@@ -24,7 +24,7 @@ Docker will manage the Python and PostgreSQL environments, so you don't need to 
 
 2. **Build the Docker containers**
 
-    The project includes a `Dockerfile` for the web application and a `docker-compose.yml` file that defines the services (web app and database).
+    The project includes a `Dockerfile` for the web application and a `docker-compose.yml` file that defines the services ( app and database).
 
     ```bash
     docker-compose build
@@ -36,4 +36,4 @@ Docker will manage the Python and PostgreSQL environments, so you don't need to 
     docker-compose up
     ```
 
-    This command starts the necessary services defined in your `docker-compose.yml`. It typically includes the web application and the PostgreSQL database service.
+    This command starts the necessary services defined in your `docker-compose.yml`. It includes the backend application and the PostgreSQL database service.
