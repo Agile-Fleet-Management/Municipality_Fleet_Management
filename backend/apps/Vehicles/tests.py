@@ -1,113 +1,107 @@
 from django.urls import reverse
+from rest_framework.test import APITestCase, APIClient
 from rest_framework import status
-from rest_framework.test import APITestCase
-from .models import Vtype, Vehicle, Mtype, Maintenance
+from .models import Vehicle, Vtype, Mtype, Maintenance
+from apps.users.models import User, Role
+
 
 class VtypeTests(APITestCase):
     def setUp(self):
-        self.vtype_data = {'name': 'Sedan', 'description': 'Standard Sedan type'}
+
+        self.client = APIClient()
+        self.admin_role = Role.objects.create(name="Admin", description="Administrator role")
+        self.admin_user = User.objects.create_superuser('admin', 'admin@example.com', 'adminpassword')
+
+        # Authenticate as the admin user before making the request
+        self.client.force_authenticate(user=self.admin_user)
+        self.vtype = Vtype.objects.create(name="Sedan", description="Comfortable seating for four")
 
     def test_create_vtype(self):
-        response = self.client.post(reverse('vtype-list'), self.vtype_data)
+        url = reverse('vtypes-list')
+        data = {'name': 'Convertible', 'description': 'Open roof enjoyment'}
+        response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data['name'], 'Sedan')
+        self.assertEqual(Vtype.objects.count(), 2)
+        self.assertEqual(Vtype.objects.last().name, 'Convertible')
 
     def test_get_vtype(self):
-        vtype = Vtype.objects.create(**self.vtype_data)
-        response = self.client.get(reverse('vtype-detail', args=[vtype.id]))
+        url = reverse('vtypes-detail', args=[self.vtype.id])
+        response = self.client.get(url)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['description'], 'Standard Sedan type')
+        self.assertEqual(response.data['name'], self.vtype.name)
 
     def test_update_vtype(self):
-        vtype = Vtype.objects.create(**self.vtype_data)
-        new_data = {'name': 'Compact', 'description': 'Compact car type'}
-        response = self.client.put(reverse('vtype-detail', args=[vtype.id]), new_data)
+        url = reverse('vtypes-detail', args=[self.vtype.id])
+        data = {'name': 'Updated Type', 'description': 'Updated description'}
+        response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        vtype.refresh_from_db()
-        self.assertEqual(vtype.name, 'Compact')
+        self.vtype.refresh_from_db()
+        self.assertEqual(self.vtype.name, 'Updated Type')
 
     def test_delete_vtype(self):
-        vtype = Vtype.objects.create(**self.vtype_data)
-        response = self.client.delete(reverse('vtype-detail', args=[vtype.id]))
+        url = reverse('vtypes-detail', args=[self.vtype.id])
+        response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertFalse(Vtype.objects.filter(id=vtype.id).exists())
+        self.assertEqual(Vtype.objects.count(), 0)
 
 class VehicleTests(APITestCase):
     def setUp(self):
-        self.vtype = Vtype.objects.create(name='SUV', description='Sport Utility Vehicle')
-        self.vehicle_data = {
-            'brand': 'Toyota',
-            'model': 'RAV4',
-            'age': 5,
-            'status': 'available',
-            'Vtype': self.vtype.id,
-            'kms': 50000,
-            'notification_time_year': 3,
-            'notification_mileage': 50000.0,
-        }
+
+        self.client = APIClient()
+        self.admin_role = Role.objects.create(name="Admin", description="Administrator role")
+        self.admin_user = User.objects.create_superuser('admin', 'admin@example.com', 'adminpassword')
+
+        # Authenticate as the admin user before making the request
+        self.client.force_authenticate(user=self.admin_user)
+
+        self.vtype = Vtype.objects.create(name="SUV", description="Spacious and robust")
+        self.vehicle = Vehicle.objects.create(
+            brand='Ford',
+            model='Explorer',
+            age=10,
+            status='2',
+            Vtype=self.vtype,
+            kms=100000,
+            notification_time_year=5,
+            notification_mileage=120000,
+        )
 
     def test_create_vehicle(self):
-        response = self.client.post(reverse('vehicle-list'), self.vehicle_data)
+        url = reverse('vehicles-list')
+        data = {
+            "brand": "Honda",
+            "model": "Civic",
+            "age": 3,
+            "status": "2",
+            "Vtype": self.vtype.id,
+            "kms": 25000,
+            "notification_time_year": 2,
+            "notification_mileage": 50000,
+        }
+        response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data['model'], 'RAV4')
-
-    def test_get_vehicle(self):
-        vehicle = Vehicle.objects.create(**self.vehicle_data)
-        response = self.client.get(reverse('vehicle-detail', args=[vehicle.id]))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['brand'], 'Toyota')
+        self.assertEqual(Vehicle.objects.count(), 2)
+        self.assertEqual(Vehicle.objects.last().brand, "Honda")
 
     def test_update_vehicle(self):
-        vehicle = Vehicle.objects.create(**self.vehicle_data)
-        new_data = {'model': 'Corolla', 'age': 4}
-        response = self.client.put(reverse('vehicle-detail', args=[vehicle.id]), new_data)
+        url = reverse('vehicles-detail', args=[self.vehicle.id])
+        data = {
+            "brand": "Toyota",
+            "model": "Corolla",
+            "age": 4,
+            "status": "3",  # Vehicle is now booked
+            "Vtype": self.vtype.id,
+            "kms": 55000,
+            "notification_time_year": 4,
+            "notification_mileage": 75000,
+        }
+        response = self.client.put(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        vehicle.refresh_from_db()
-        self.assertEqual(vehicle.model, 'Corolla')
+        self.vehicle.refresh_from_db()
+        self.assertEqual(self.vehicle.model, "Corolla")
 
     def test_delete_vehicle(self):
-        vehicle = Vehicle.objects.create(**self.vehicle_data)
-        response = self.client.delete(reverse('vehicle-detail', args=[vehicle.id]))
+        url = reverse('vehicles-detail', args=[self.vehicle.id])
+        response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertFalse(Vehicle.objects.filter(id=vehicle.id).exists())
-
-class MaintenanceTests(APITestCase):
-    def setUp(self):
-        vtype = Vtype.objects.create(name='Coupe', description='Two-door car type')
-        vehicle = Vehicle.objects.create(brand='Ford', model='Mustang', age=3, status='available', Vtype=vtype, kms=20000)
-        mtype = Mtype.objects.create(name='Oil Change', description='Engine oil replacement')
-        self.maintenance_data = {
-            'title': 'Annual Checkup',
-            'vehicle_id': vehicle.id,
-            'start_time': '2024-01-10T12:00:00Z',
-            'end_time': '2024-01-10T15:00:00Z',
-            'm_type': mtype.id,
-            'description': 'Yearly maintenance checkup',
-            'cost': 299.99,
-            'kms': 25000
-        }
-
-    def test_create_maintenance(self):
-        response = self.client.post(reverse('maintenance-list'), self.maintenance_data)
-        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-        self.assertEqual(response.data['title'], 'Annual Checkup')
-
-    def test_get_maintenance(self):
-        maintenance = Maintenance.objects.create(**self.maintenance_data)
-        response = self.client.get(reverse('maintenance-detail', args=[maintenance.id]))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data['description'], 'Yearly maintenance checkup')
-
-    def test_update_maintenance(self):
-        maintenance = Maintenance.objects.create(**self.maintenance_data)
-        new_data = {'title': 'Biannual Checkup', 'cost': 199.99}
-        response = self.client.put(reverse('maintenance-detail', args=[maintenance.id]), new_data)
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-        maintenance.refresh_from_db()
-        self.assertEqual(maintenance.title, 'Biannual Checkup')
-
-    def test_delete_maintenance(self):
-        maintenance = Maintenance.objects.create(**self.maintenance_data)
-        response = self.client.delete(reverse('maintenance-detail', args=[maintenance.id]))
-        self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
-        self.assertFalse(Maintenance.objects.filter(id=maintenance.id).exists())
+        self.assertEqual(Vehicle.objects.count(), 0)

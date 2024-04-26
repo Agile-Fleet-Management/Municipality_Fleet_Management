@@ -12,14 +12,13 @@
 
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .views import VehicleViewSet,VtypeViewSet,MtypeViewSet, MaintenanceViewSet
+from .views import VehicleViewSet, VtypeViewSet, MtypeViewSet, MaintenanceViewSet
 
 router = DefaultRouter()
-router.register(r'vehicles', VehicleViewSet)
-router.register(r'vtypes', VtypeViewSet)
-router.register(r'mtypes', MtypeViewSet)
-router.register(r'maintenances', MaintenanceViewSet)
-
+router.register(r'vehicles', VehicleViewSet, basename='vehicles')
+router.register(r'vtypes', VtypeViewSet, basename='vtypes')
+router.register(r'mtypes', MtypeViewSet, basename='mtypes')
+router.register(r'maintenances', MaintenanceViewSet, basename='maintenances')
 
 urlpatterns = [
     path('', include(router.urls)),
