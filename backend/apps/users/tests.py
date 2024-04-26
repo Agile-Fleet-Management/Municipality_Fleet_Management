@@ -1,9 +1,10 @@
 from django.test import TestCase
 from django.contrib.auth import get_user_model
-from apps.users.models import Role, User
+from .models import Role, User
 from rest_framework.test import APIClient
 from rest_framework import status
 from django.urls import reverse
+
 class RoleModelTests(TestCase):
     def test_create_role(self):
         role = Role.objects.create(name="Admin", description="Administrator role")
@@ -19,11 +20,14 @@ class UserModelTests(TestCase):
         user = User.objects.create_user(username="john", phone_number="1234567890", address="123 Main St", role_id=role)
         self.assertEqual(user.__str__(), "john")
         self.assertEqual(user.role_id, role)
+
 class UserViewTests(TestCase):
     def setUp(self):
         self.client = APIClient()
         self.admin_role = Role.objects.create(name="Admin", description="Administrator role")
         self.user_data = {
+            "first_name": "John",
+            "last_name": "Doe",
             "username": "john",
             "email": "john@example.com",
             "password": "test1234",

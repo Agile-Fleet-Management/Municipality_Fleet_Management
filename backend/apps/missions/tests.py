@@ -5,10 +5,17 @@ from .models import Mission, Driver, MissionParticipant
 from apps.users.models import User, Role
 from apps.Vehicles.models import Vehicle, Vtype
 from .serializers import MissionSerializer
+from rest_framework.test import APIClient
 
 
 class MissionTests(APITestCase):
     def setUp(self):
+        self.client = APIClient()
+        self.admin_role = Role.objects.create(name="Admin", description="Administrator role")
+        self.admin_user = User.objects.create_superuser('admin', 'admin@example.com', 'adminpassword')
+
+        # Authenticate as the admin user before making the request
+        self.client.force_authenticate(user=self.admin_user)
 
         self.role = Role.objects.create(name="Test Role", description="A test")
 
@@ -141,6 +148,14 @@ class MissionTests(APITestCase):
 class DriverTests(APITestCase):
     def setUp(self):
         super().setUp()
+
+        self.client = APIClient()
+        self.admin_role = Role.objects.create(name="Admin", description="Administrator role")
+        self.admin_user = User.objects.create_superuser('admin', 'admin@example.com', 'adminpassword')
+
+        # Authenticate as the admin user before making the request
+        self.client.force_authenticate(user=self.admin_user)
+        
         self.role = Role.objects.create(name="Test Role", description="A test")
         self.user = User.objects.create_user(
             username="testuser",
