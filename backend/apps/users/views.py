@@ -9,7 +9,7 @@ from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.utils.timezone import now
 from rest_framework_simplejwt.serializers import TokenVerifySerializer
 from rest_framework_simplejwt.exceptions import TokenError
-from rest_framework.views import APIView
+from rest_framework.views import APIView, ModelViewSet
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
@@ -24,6 +24,10 @@ class IsAdminUser(permissions.BasePermission):
 
         return bool(request.user and request.user.is_authenticated and request.user.is_staff)
 
+class User(ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [IsAdminUser]
 
 class VerifyTokenView(APIView):
     permission_classes = (AllowAny,)
