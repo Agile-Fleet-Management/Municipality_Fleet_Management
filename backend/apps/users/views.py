@@ -24,6 +24,13 @@ class IsAdminUser(permissions.BasePermission):
 
         return bool(request.user and request.user.is_authenticated and request.user.is_staff)
 
+class UserList(APIView):
+    permission_classes = [IsAdminUser]
+
+    def get(self, request):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
 
 class VerifyTokenView(APIView):
     permission_classes = (AllowAny,)
@@ -48,6 +55,7 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['last_name'] = user.last_name
         token['email'] = user.email
         token['id'] = user.id
+        token['role'] = user.role
         token['picture'] = user.picture.url if user.picture else None
         return token
 

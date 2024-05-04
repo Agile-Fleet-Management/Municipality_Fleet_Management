@@ -10,10 +10,23 @@ class Role(models.Model):
         return self.name
 
 class User(AbstractUser):
-    
+    ADMIN = 'admin'
+    MANAGER = 'manager'
+    FLEET_MANAGER = 'fleet_manager'
+
     phone_number = models.CharField(max_length=20) 
     address = models.CharField(max_length=20) 
-    role_id = models.ForeignKey(Role,on_delete=models.CASCADE,null=True,blank=True)   #
+    ROLE_CHOICES = [
+        (ADMIN, 'Admin'),
+        (MANAGER, 'Manager'),
+        (FLEET_MANAGER, 'Fleet Manager'),
+    ]
+
+    role = models.CharField(
+        max_length=50,
+        choices=ROLE_CHOICES,
+        default=MANAGER,  # Default role can be set as needed
+    )
     picture = models.ImageField(upload_to='images/', null=True, blank=True)
 
     def __str__(self):
