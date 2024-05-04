@@ -10,6 +10,8 @@ from django.utils.timezone import now
 from rest_framework_simplejwt.serializers import TokenVerifySerializer
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework.views import APIView
+from rest_framework.generics import ListAPIView
+
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
@@ -22,15 +24,11 @@ class IsAdminUser(permissions.BasePermission):
     def has_permission(self, request, view):
         print(request.user)
 
-        return bool(request.user and request.user.is_authenticated and request.user.is_staff)
+        return bool(request.user and request.user.is_authenticated and request.user.role == 'admin')
 
-class UserList(APIView):
-    permission_classes = [IsAdminUser]
-
-    def get(self, request):
-        users = User.objects.all()
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
+class UserList(ListAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
 class VerifyTokenView(APIView):
     permission_classes = (AllowAny,)
