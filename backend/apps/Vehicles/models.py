@@ -52,14 +52,15 @@ class Mtype(models.Model):
 
 class Maintenance(models.Model):
     title = models.CharField(max_length=20)
-    vehicle_id = models.CharField(max_length=20)
-    start_time = models.DateTimeField()  # Use DateTimeField for datetime information
-    end_time = models.DateTimeField()    # Use DateTimeField for datetime information
-    m_type = models.ForeignKey('Mtype', on_delete=models.CASCADE)  # Assuming 'Mtype' is another model
-    description = models.CharField(max_length=500)  # There was a typo here, corrected it to 'description'
+    vehicle = models.ForeignKey(Vehicle, null=True, on_delete=models.CASCADE)
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    m_type = models.ForeignKey(Mtype, on_delete=models.CASCADE)
+    description = models.CharField(max_length=500)
     cost = models.FloatField()
-    kms = models.FloatField()  # Removed max_length as it is not used with FloatField
+    kms = models.FloatField()
 
     def __str__(self):
         return self.title
+
 

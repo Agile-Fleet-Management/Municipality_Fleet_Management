@@ -3,21 +3,18 @@ from .models import Vehicle,Vtype, Maintenance,Mtype
 
 class VehicleSerializer(serializers.ModelSerializer):
     status_display = serializers.SerializerMethodField()  # For the display value of status
-    Vtype_display = serializers.SerializerMethodField()  # For the string representation of Vtype
+    Vtype_display = serializers.CharField(source='Vtype.name')  # Use source to specify the attribute
 
     class Meta:
         model = Vehicle
         fields = [
-            'brand', 'model', 'age', 'status', 'status_display', 'Vtype', 
+            'id','brand', 'model', 'age', 'status', 'status_display', 
             'Vtype_display', 'kms', 'notification_time_year', 
             'notification_mileage', 'picture'
         ]
 
     def get_status_display(self, obj):
         return obj.get_status_display()
-
-    def get_Vtype_display(self, obj):
-        return str(obj.Vtype)  # Assuming that the Vtype model has a __str__ method defined
     
 class VtypeSerializer(serializers.ModelSerializer):
     class Meta:

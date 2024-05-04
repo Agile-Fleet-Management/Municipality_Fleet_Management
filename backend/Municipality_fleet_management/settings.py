@@ -41,6 +41,9 @@ INSTALLED_APPS = [
     'apps.Vehicles',
     'rest_framework',
     'rest_framework.authtoken',
+    'corsheaders',
+
+    
 
 ]
 AUTH_USER_MODEL = "users.User"
@@ -96,6 +99,15 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
+]
+CORS_ALLOW_ALL_ORIGINS = True  # Allows from all origins
+# or
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3001',  # Assuming your React app is served from this URL
+    'http://127.0.0.1:3001',  # Also allow this in case of differences in addressing localhost
 ]
 
 ROOT_URLCONF = 'Municipality_fleet_management.urls'
@@ -122,6 +134,17 @@ WSGI_APPLICATION = 'Municipality_fleet_management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'fleet_management',
+#         'USER': 'postgres',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost', 
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -132,6 +155,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+
 
 
 
