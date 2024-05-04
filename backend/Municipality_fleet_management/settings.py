@@ -134,16 +134,28 @@ WSGI_APPLICATION = 'Municipality_fleet_management.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'fleet_management',
+#         'USER': 'postgres',
+#         'PASSWORD': 'password',
+#         'HOST': 'localhost', 
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'fleet_management',
         'USER': 'postgres',
         'PASSWORD': 'password',
-        'HOST': 'localhost', 
+        'HOST': 'postgres', 
         'PORT': '5432',
     }
 }
+
 
 
 
