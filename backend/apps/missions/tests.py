@@ -17,14 +17,14 @@ class MissionTests(APITestCase):
         # Authenticate as the admin user before making the request
         self.client.force_authenticate(user=self.admin_user)
 
-        self.role = Role.objects.create(name="Test Role", description="A test")
+        self.role = Role.objects.create(name="admin", description="A test")
 
         self.user = User.objects.create_user(
             username="testuser",
             password="testpassword123",
             phone_number="1234567890",
             address="123 Test St",
-            role_id=self.role,
+            role=self.role,
         )
         self.mission1 = Mission.objects.create(
             title="Mission 1",
@@ -162,7 +162,7 @@ class DriverTests(APITestCase):
             password="testpassword123",
             phone_number="1234567890",
             address="123 Test St",
-            role_id=self.role,
+            role=self.role,
         )
 
         self.mission1 = Mission.objects.create(
