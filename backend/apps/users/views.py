@@ -17,12 +17,26 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
+from django.core.exceptions import ValidationError
+import logging
 
+logger = logging.getLogger(__name__)
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = [AllowAny]  # Adjust permissions as necessary
+    permission_classes = [AllowAny]
+
+    def create(self, request, *args, **kwargs):
+        try:
+            return super().create(request, *args, **kwargs)
+        except Exception as e:
+            # Log the error and also send it back in the response for debugging
+            logger.error(f'Error creating user: {str(e)}')
+            return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+
 class IsAdminUser(permissions.BasePermission):
     """
     Allows access only to admin users.
