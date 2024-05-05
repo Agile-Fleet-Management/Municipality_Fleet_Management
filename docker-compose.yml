@@ -3,6 +3,7 @@ version: "3.7"
 services:
   backend:
     container_name: backend
+    env_file: .env
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -12,36 +13,33 @@ services:
       - app
     restart: unless-stopped
     depends_on:
-      - postgres
-    command: >
-      sh -c "until pg_isready -h postgres -p 5432; do sleep 1; done &&
-             python manage.py migrate &&
-             python manage.py runserver 0.0.0.0:9000"
+      postgres:
+        condition: service_healthy
 
   postgres:
     image: postgres:latest
     container_name: postgres
+    env_file: .env
     environment:
-      POSTGRES_DB: fleet_management
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=fleet_management
     ports:
       - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
     networks:
       - app
+    volumes:
+      - postgres:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 5s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
+
+volumes:
+  postgres:
+
 
 networks:
   app:
     driver: bridge
-
-volumes:
-  postgres_data:
-    driver: local
