@@ -21,6 +21,8 @@ jobs:
           script: |
             cd Municipality_Fleet_Management
             echo "Pulling latest API changes"
+            echo "Stashing any local changes..."
+            git stash --include-untracked
             git pull
             chmod +rwx ./scripts/deploy.sh
             ./scripts/deploy.sh
