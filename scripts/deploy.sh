@@ -15,8 +15,8 @@ echo "Successfully pulled the latest changes."
 
 # Build and start the Docker containers
 echo "Building and starting Docker containers..."
-docker-compose build --no-cache
-docker-compose up -d
+#docker compose  --no-cache
+docker compose up -d --build
 
 echo "Docker containers are up and running."
 
