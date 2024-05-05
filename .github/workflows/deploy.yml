@@ -20,9 +20,9 @@ jobs:
           password: ${{ secrets.DIGITALOCEAN_DROPLET_PASSWORD }}
           script: |
             cd Municipality_Fleet_Management
-            echo "Pulling latest API changes"
             echo "Stashing any local changes..."
             git stash --include-untracked
+            echo "Pulling latest API changes"
             git pull
             chmod +rwx ./scripts/deploy.sh
             ./scripts/deploy.sh
