@@ -1,7 +1,25 @@
 version: "3.7"
 
 services:
-  db:
+  backend:
+    container_name: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    env_file: .env
+    ports:
+      - "9000:5000"
+    networks:
+      - app
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    command: >
+      sh -c "until pg_isready -h postgres -p 5432; do sleep 1; done &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:9000"
+
+  postgres:
     image: postgres:latest
     container_name: postgres
     environment:
@@ -20,29 +38,6 @@ services:
       timeout: 5s
       retries: 5
     restart: unless-stopped
-
-  backend:
-    container_name: backend
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    env_file: .env
-    ports:
-      - "9000:5000"
-    networks:
-      - app
-    restart: unless-stopped
-    depends_on:
-      - db
-    command: >
-      sh -c "while !</dev/tcp/postgres/5432; do sleep 1; done;
-            python manage.py migrate &&
-            python manage.py runserver 0.0.0.0:9000"
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "3"
 
 networks:
   app:
