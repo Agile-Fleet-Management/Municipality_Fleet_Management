@@ -1,6 +1,26 @@
 version: "3.7"
 
 services:
+  db:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_DB: fleet_management
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
   backend:
     container_name: backend
     build:
@@ -13,29 +33,20 @@ services:
       - app
     restart: unless-stopped
     depends_on:
-      postgres:
-        condition: service_started
+      - db
     command: >
       sh -c "python manage.py migrate &&
              python manage.py runserver 0.0.0.0:9000"
-
-  db:
-    image: postgres:latest
-    container_name: postgres
-    environment:
-      POSTGRES_DB: fleet_management
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-    ports:
-      - "5432:5432"
-    networks:
-      - app
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
   app:
     driver: bridge
+
+volumes:
+  postgres_data:
+    driver: local
