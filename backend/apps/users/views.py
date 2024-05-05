@@ -11,12 +11,18 @@ from rest_framework_simplejwt.serializers import TokenVerifySerializer
 from rest_framework_simplejwt.exceptions import TokenError
 from rest_framework.views import APIView
 from rest_framework.generics import ListAPIView
+from rest_framework import viewsets
 
 from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import permissions
 
+
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [AllowAny]  # Adjust permissions as necessary
 class IsAdminUser(permissions.BasePermission):
     """
     Allows access only to admin users.
@@ -29,6 +35,7 @@ class IsAdminUser(permissions.BasePermission):
 class UserList(ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
 
 class VerifyTokenView(APIView):
     permission_classes = (AllowAny,)
