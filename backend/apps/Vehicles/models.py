@@ -20,12 +20,17 @@ class Vehicle(models.Model):
         ("2","available"),
         ("3","booked"),
     ]
+    Vtype_choices=[
+        ("1","Car"),
+        ("2","Bus"),
+        ("3","Taxi"),
+    ]
     status=models.CharField(choices=status_choices,default="2",max_length=20)
-    Vtype = models.ForeignKey(Vtype,on_delete=models.CASCADE)
+    vtype=models.CharField(choices=Vtype_choices,default="2",max_length=20)
     kms = models.FloatField() 
     notification_time_year = models.IntegerField()
     notification_mileage = models.FloatField()
-
+    
     picture = models.ImageField(upload_to='vehicle_pictures/', null=True)
 
     def save(self, *args, **kwargs):
