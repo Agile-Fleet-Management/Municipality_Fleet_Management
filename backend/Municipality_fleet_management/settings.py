@@ -105,7 +105,7 @@ MIDDLEWARE = [
 ]
 CORS_ALLOW_ALL_ORIGINS = True  # Allows from all origins
 
-
+ALLOWED_HOSTS=['*']
 ROOT_URLCONF = 'Municipality_fleet_management.urls'
 
 TEMPLATES = [
