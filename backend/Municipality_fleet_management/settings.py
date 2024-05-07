@@ -106,6 +106,11 @@ MIDDLEWARE = [
 CORS_ALLOW_ALL_ORIGINS = True  # Allows from all origins
 
 ALLOWED_HOSTS=['*']
+CSRF_TRUSTED_ORIGINS = [
+    'https://www.agile.fixi.website',
+]
+
+
 ROOT_URLCONF = 'Municipality_fleet_management.urls'
 
 TEMPLATES = [
