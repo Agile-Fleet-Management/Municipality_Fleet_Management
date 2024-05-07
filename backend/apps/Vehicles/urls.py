@@ -16,7 +16,7 @@ from .views import VehicleViewSet, VtypeViewSet, MtypeViewSet, MaintenanceViewSe
 
 router = DefaultRouter()
 router.register(r'vehicles', VehicleViewSet, basename='vehicles')
-router.register(r'vtypes', VtypeViewSet, basename='vtypes')
+# router.register(r'vtypes', VtypeViewSet, basename='vtypes')
 router.register(r'mtypes', MtypeViewSet, basename='mtypes')
 router.register(r'maintenances', MaintenanceViewSet, basename='maintenances')
 

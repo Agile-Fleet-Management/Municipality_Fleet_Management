@@ -20,13 +20,9 @@ class Vehicle(models.Model):
         ("2","available"),
         ("3","booked"),
     ]
-    Vtype_choices=[
-        ("1","Car"),
-        ("2","Bus"),
-        ("3","Taxi"),
-    ]
+    
     status=models.CharField(choices=status_choices,default="2",max_length=20)
-    vtype=models.CharField(choices=Vtype_choices,default="2",max_length=20)
+    transport = models.CharField(max_length=20)     
     kms = models.FloatField() 
     notification_time_year = models.IntegerField()
     notification_mileage = models.FloatField()

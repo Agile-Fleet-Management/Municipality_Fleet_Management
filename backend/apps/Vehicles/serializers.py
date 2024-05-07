@@ -7,7 +7,8 @@ from .models import Vehicle, Vtype
 
 class VehicleSerializer(serializers.ModelSerializer):
     status_display = serializers.SerializerMethodField()
-    Vtype_display = serializers.CharField(source='Vtype.name', read_only=True)
+    # tool_display = serializers.SerializerMethodField()
+    # Vtype_display = serializers.CharField(source='Vtype.name', read_only=True)
 
     class Meta:
         model = Vehicle
@@ -15,6 +16,7 @@ class VehicleSerializer(serializers.ModelSerializer):
 
     def get_status_display(self, obj):
         return obj.get_status_display()
+    
 
     def create(self, validated_data):
     
