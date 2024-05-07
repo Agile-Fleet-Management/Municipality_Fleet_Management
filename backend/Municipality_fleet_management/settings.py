@@ -141,17 +141,23 @@ WSGI_APPLICATION = 'Municipality_fleet_management.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'fleet_management',
+#         'USER': 'postgres',
+#         'PASSWORD': 'password',
+#         'HOST': 'postgres', 
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'fleet_management',
-        'USER': 'postgres',
-        'PASSWORD': 'password',
-        'HOST': 'postgres', 
-        'PORT': '5432',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3',
     }
 }
-
 
 
 
