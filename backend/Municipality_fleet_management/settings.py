@@ -104,11 +104,7 @@ MIDDLEWARE = [
 
 ]
 CORS_ALLOW_ALL_ORIGINS = True  # Allows from all origins
-# or
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3001',  # Assuming your React app is served from this URL
-    'http://127.0.0.1:3001',  # Also allow this in case of differences in addressing localhost
-]
+
 
 ROOT_URLCONF = 'Municipality_fleet_management.urls'
 
