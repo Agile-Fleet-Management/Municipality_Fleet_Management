@@ -103,7 +103,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 
 ]
-CORS_ALLOW_ALL_ORIGINS = True  # Allows from all origins
 
 ALLOWED_HOSTS=['*']
 CSRF_TRUSTED_ORIGINS = [
