@@ -103,11 +103,11 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 
 ]
+CORS_ALLOW_ALL_ORIGINS = True 
 
 ALLOWED_HOSTS=['*']
-CSRF_TRUSTED_ORIGINS = [
-    'https://www.agile.fixi.website',
-]
+USE_X_FORWARDED_HOST = True
+
 
 
 ROOT_URLCONF = 'Municipality_fleet_management.urls'
