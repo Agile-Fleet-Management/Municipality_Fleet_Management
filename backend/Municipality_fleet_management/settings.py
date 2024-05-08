@@ -109,7 +109,12 @@ LOGIN_URL = "account_login"
 
 ALLOWED_HOSTS=['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://www.agile.fixi.website']
+# settings.py
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://www.agile.fixi.website',
+    'https://agile.fixi.website'
+]
 USE_X_FORWARDED_HOST = True
 
 # settings.py
