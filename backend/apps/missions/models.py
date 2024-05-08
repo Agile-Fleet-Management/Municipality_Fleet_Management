@@ -20,7 +20,7 @@ class Mission(models.Model):
     status = models.CharField(choices=status_choices, default="4", max_length=20)
 
     expected_arrival = models.DateTimeField(max_length=20)
-    requester_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    requester_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     request_time = models.DateTimeField(default=datetime.now)
     description = models.CharField(max_length=500)
 
@@ -43,9 +43,9 @@ class Mission(models.Model):
 
 class Driver(models.Model):
 
-    mission_id = models.ForeignKey(Mission, on_delete=models.CASCADE)
-    vehicle_id = models.ForeignKey(Vehicle, on_delete=models.CASCADE)
-    driver_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    mission_id = models.ForeignKey(Mission, on_delete=models.SET_NULL, null=True)
+    vehicle_id = models.ForeignKey(Vehicle, on_delete=models.SET_NULL, null=True)
+    driver_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         unique_together = ("mission_id", "vehicle_id")
@@ -56,8 +56,8 @@ class Driver(models.Model):
 
 class MissionParticipant(models.Model):
 
-    mission_id = models.ForeignKey(Mission, on_delete=models.CASCADE)
-    participant_id = models.ForeignKey(User, on_delete=models.CASCADE)
+    mission_id = models.ForeignKey(Mission, on_delete=models.SET_NULL, null=True)
+    participant_id = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
 
     class Meta:
         unique_together = ("mission_id", "participant_id")
