@@ -114,6 +114,8 @@ ALLOWED_HOSTS=['*']
 CSRF_TRUSTED_ORIGINS = [
     'https://www.agile.fixi.website',
     'https://agile.fixi.website'
+    'localhost:3000',
+    'http://localhost:3000',
 ]
 USE_X_FORWARDED_HOST = True
 
