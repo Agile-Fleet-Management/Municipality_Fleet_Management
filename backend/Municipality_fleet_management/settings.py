@@ -107,7 +107,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 ALLOWED_HOSTS=['*']
 
-CSRF_TRUSTED_ORIGINS = ['*']
+CSRF_TRUSTED_ORIGINS = ['https://xtrain-f678e.web.app/']
 USE_X_FORWARDED_HOST = True
 
 
