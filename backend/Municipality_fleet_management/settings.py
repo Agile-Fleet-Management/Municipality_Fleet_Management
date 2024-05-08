@@ -107,7 +107,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 ALLOWED_HOSTS=['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://xtrain-f678e.web.app/']
+CSRF_TRUSTED_ORIGINS = ['https://www.agile.fixi.website']
 USE_X_FORWARDED_HOST = True
 
 
