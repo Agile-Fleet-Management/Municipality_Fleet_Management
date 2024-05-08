@@ -110,6 +110,13 @@ ALLOWED_HOSTS=['*']
 CSRF_TRUSTED_ORIGINS = ['https://www.agile.fixi.website']
 USE_X_FORWARDED_HOST = True
 
+# settings.py
+
+SECURE_SSL_REDIRECT = True  # Redirect all HTTP traffic to HTTPS
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_HSTS_SECONDS = 3600  # Enable HSTS
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 
 ROOT_URLCONF = 'Municipality_fleet_management.urls'
